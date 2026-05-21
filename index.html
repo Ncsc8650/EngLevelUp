@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="EngLevelUp ระบบเรียนภาษาอังกฤษออนไลน์ พร้อมล็อกอินจริง แอดมินจัดการผู้ใช้ และเดโม่คำศัพท์ 3 ชุด" />
+    <meta name="description" content="EngLevelUp ระบบเรียนภาษาอังกฤษออนไลน์ พร้อม Public Demo 20 ชุดคำศัพท์ ฟัง พูด เขียน Quiz และระบบล็อกอินจริง" />
     <title>EngLevelUp English Learning</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +14,13 @@
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <a class="brand" href="#home" aria-label="EngLevelUp"><span class="brand-mark">EL</span><span><strong>EngLevelUp</strong><small id="versionBadge">v4.2.0</small></span></a>
+        <a class="brand" href="#home" aria-label="EngLevelUp">
+          <span class="brand-mark">EL</span>
+          <span>
+            <strong>EngLevelUp</strong>
+            <small id="versionBadge">v4.3.0</small>
+          </span>
+        </a>
         <nav class="nav-links" aria-label="Primary navigation">
           <a href="#demo" data-nav="public">ทดลองเรียน</a>
           <a href="#student" data-nav="student">ผู้เรียน</a>
@@ -23,25 +29,91 @@
           <a href="#security" data-nav="student admin">ความปลอดภัย</a>
         </nav>
         <div class="top-actions">
-          <div class="segmented-control" aria-label="Language switcher"><button class="lang-toggle active" type="button" data-lang="th">TH</button><button class="lang-toggle" type="button" data-lang="en">EN</button></div>
-          <button class="btn btn-secondary" type="button" id="loginOpen">ล็อกอิน</button><button class="btn btn-primary" type="button" id="logoutBtn" hidden>ออกจากระบบ</button>
+          <div class="segmented-control" aria-label="Language switcher">
+            <button class="lang-toggle active" type="button" data-lang="th">TH</button>
+            <button class="lang-toggle" type="button" data-lang="en">EN</button>
+          </div>
+          <button class="btn btn-secondary" type="button" id="loginOpen">ล็อกอิน</button>
+          <button class="btn btn-primary" type="button" id="logoutBtn" hidden>ออกจากระบบ</button>
         </div>
       </header>
+
       <main>
         <section class="hero" id="home" data-section-role="public">
           <div class="hero-copy">
-            <p class="eyebrow">Demo Vocabulary Preview</p><h1>ทดลองเรียนคำศัพท์ก่อนใช้งานระบบเต็ม</h1>
-            <p class="hero-text">หน้าแรกเปิดให้ลูกค้าทดลองเล่นคำศัพท์ 3 ชุดเท่านั้น ส่วนระบบเรียนเต็ม แอดมิน ชำระเงิน และความปลอดภัยจะแสดงหลังล็อกอินตามสิทธิ์ผู้ใช้</p>
-            <div class="hero-actions"><a class="btn btn-primary" href="#demo">ทดลองคำศัพท์ 3 ชุด</a><button class="btn btn-secondary" type="button" data-action="open-login">ล็อกอินเข้าสู่ระบบ</button></div>
-            <div class="hero-trust"><span>Thai ready</span><span>Mobile first</span><span>Role login</span><span>Google Sheets log queue</span></div>
+            <p class="eyebrow">Demo Vocabulary Preview</p>
+            <h1>ทดลองเรียนคำศัพท์ก่อนใช้งานระบบเต็ม</h1>
+            <p class="hero-text">หน้าแรกเปิดให้ลูกค้าทดลองเล่น Student Workspace แบบ Public Demo ได้ครบ พร้อมคำศัพท์ 20 ชุด ฟัง พูด เรียงประโยค Writing Coach และ Quiz ก่อนเข้าสู่ระบบเต็ม</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#demo">ทดลองคำศัพท์ 20 ชุด</a>
+              <button class="btn btn-secondary" type="button" data-action="open-login">ล็อกอินเข้าสู่ระบบ</button>
+            </div>
+            <div class="hero-trust">
+              <span>Thai ready</span>
+              <span>Mobile first</span>
+              <span>Role login</span>
+              <span>Google Sheets log queue</span>
+            </div>
           </div>
-          <div class="hero-panel login-panel" id="loginPanel"><div class="panel-head"><span>เข้าสู่ระบบ</span><strong>User database</strong></div><form id="loginForm" class="login-form"><label>Username<input id="loginUsername" autocomplete="username" required placeholder="student01 หรือ admin01" /></label><label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="123456" /></label><button class="btn btn-primary" type="submit">ล็อกอิน</button><p class="feedback" id="loginFeedback">ตัวอย่าง: student01 / 123456 หรือ admin01 / admin123</p></form></div>
+          <div class="hero-panel login-panel" id="loginPanel">
+            <div class="panel-head">
+              <span>เข้าสู่ระบบ</span>
+              <strong id="loginRoleHint">User database</strong>
+            </div>
+            <form id="loginForm" class="login-form">
+              <label>Username<input id="loginUsername" autocomplete="username" required placeholder="student01 หรือ admin01" /></label>
+              <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="123456" /></label>
+              <button class="btn btn-primary" type="submit">ล็อกอิน</button>
+              <p class="feedback" id="loginFeedback">ตัวอย่าง: student01 / 123456 หรือ admin01 / admin123</p>
+            </form>
+          </div>
         </section>
-        <section class="section" id="demo" data-section-role="public"><div class="section-heading"><p class="eyebrow">Public Demo</p><h2>เดโม่คำศัพท์ 3 ชุด เล่นได้ก่อนล็อกอิน</h2><p>คำศัพท์แสดงความหมายไทยในวงเล็บหลังคำเดียว เพื่อให้ลูกค้าเห็นคุณภาพคอนเทนต์ก่อนใช้งานระบบเต็ม</p></div><div class="demo-deck-tabs" id="demoDeckTabs"></div><div class="demo-game" id="demoGame"></div></section>
-        <section class="section" id="student" data-section-role="student"><div class="section-heading"><p class="eyebrow">Student Workspace</p><h2>ระบบเรียนสำหรับลูกค้า</h2><p>หลังล็อกอิน ลูกค้าเห็นเฉพาะเมนูผู้เรียนและความปลอดภัย</p></div><div class="student-app"><aside class="student-sidebar"><div class="student-profile"><strong id="studentName">Student</strong><span id="studentMeta">สิทธิ์ผู้เรียน</span></div><div class="student-stat"><span>ช่วงเวลาที่ใช้งานระบบได้</span><strong id="studentWindow">-</strong></div><div class="student-stat"><span>สถานะบัญชี</span><strong id="studentStatus">active</strong></div><div class="workflow-list compact" id="studentWorkflow"></div></aside><div class="learning-workspace"><div class="learning-toolbar"><div><span class="badge active">Full Lesson</span><h3 id="lessonTitle">Beginner Essentials</h3><p id="lessonDescription">เรียนคำศัพท์ ฟังเสียง เรียงประโยค ฝึกพูด เขียน และทำ Quiz</p></div></div><div class="lesson-tabs" id="lessonTabs"></div><div class="learning-grid"><article class="tool-panel wide"><div class="panel-head"><strong>Lesson Player</strong><button class="icon-btn" type="button" data-action="speak-lesson" aria-label="read lesson">▶</button></div><p id="lessonBody"></p><div class="mini-timeline" id="lessonSteps"></div></article><article class="tool-panel"><div class="panel-head"><strong>Vocabulary</strong><button class="btn btn-secondary" type="button" data-action="next-word">คำต่อไป</button></div><h3 id="vocabWord">practice (ฝึกฝน)</h3><p id="vocabExample">Practice speaking every day.</p><button class="btn btn-primary" type="button" data-action="speak-word">ฟังเสียง</button></article><article class="tool-panel"><strong>Sentence Builder</strong><p>เรียงคำให้เป็นประโยค</p><div class="word-bank" id="wordBank"></div><div class="answer-box" id="sentenceAnswer"></div><div class="tool-actions"><button class="btn btn-secondary" type="button" data-action="clear-sentence">ล้าง</button><button class="btn btn-primary" type="button" data-action="check-sentence">ตรวจคำตอบ</button></div><p class="feedback" id="sentenceFeedback"></p></article><article class="tool-panel"><strong>Listening & Speaking</strong><p id="speakingPrompt">Please introduce yourself.</p><div class="tool-actions"><button class="btn btn-secondary" type="button" data-action="play-prompt">ฟังโจทย์</button><button class="btn btn-primary" type="button" data-action="record-speech">พูดตอบ</button></div><p class="feedback" id="speechFeedback">ระบบจะให้คะแนนหลังพูด</p></article><article class="tool-panel"><strong>Writing Coach</strong><textarea id="writingInput" rows="5" placeholder="Write 2-3 English sentences here..."></textarea><button class="btn btn-primary" type="button" data-action="check-writing">ตรวจงานเขียน</button><p class="feedback" id="writingFeedback"></p></article><article class="tool-panel"><strong>Quiz</strong><p id="quizQuestion"></p><div class="quiz-options" id="quizOptions"></div><p class="feedback" id="quizFeedback"></p></article></div></div></div></section>
-        <section class="section" id="admin" data-section-role="admin"><div class="section-heading"><p class="eyebrow">Admin Management</p><h2>หลังบ้านแอดมิน: สร้างยูสเซอร์ จัดการคอนเทนต์ และดูประวัติ</h2></div><div class="admin-board"><aside class="admin-menu" id="adminMenu"></aside><div class="admin-content"><section class="admin-tab" data-admin-tab="users"><div class="table-toolbar"><strong>สร้าง User สำหรับแอดมินและลูกค้า</strong><span class="badge active">บันทึกลงฐานข้อมูลในเครื่อง + Queue ไป Google Sheets</span></div><form id="userForm" class="user-form"><label>บทบาท<select id="newRole"><option value="student">ลูกค้า / ผู้เรียน</option><option value="admin">แอดมิน</option></select></label><label>คำนำหน้า<input id="newPrefix" placeholder="นาย / นางสาว / Mr." /></label><label>ชื่อ<input id="newFirst" required /></label><label>สกุล<input id="newLast" required /></label><label>ชื่อเล่น<input id="newNick" /></label><label>Username<input id="newUsername" required /></label><label>Password<input id="newPassword" required minlength="6" /></label><label>เริ่มใช้งาน<input id="newStart" type="date" required /></label><label>สิ้นสุดใช้งาน<input id="newEnd" type="date" required /></label><button class="btn btn-primary" type="submit">สร้างยูสเซอร์</button><p class="feedback" id="userFormFeedback"></p></form><div class="responsive-table"><table><thead><tr><th>ชื่อ</th><th>Username</th><th>สิทธิ์</th><th>ช่วงเวลาใช้งาน</th><th>สถานะ</th></tr></thead><tbody id="userRows"></tbody></table></div></section><section class="admin-tab" data-admin-tab="vocab" hidden><div class="table-toolbar"><strong>ฐานข้อมูลคำศัพท์</strong><button class="btn btn-secondary" type="button" data-action="seed-vocab">โหลดชุดคำศัพท์ตัวอย่าง</button></div><div class="responsive-table"><table><thead><tr><th>คำศัพท์</th><th>ชนิดคำ</th><th>Level</th><th>ตัวอย่าง</th><th>แหล่งข้อมูล</th></tr></thead><tbody id="vocabularyRows"></tbody></table></div></section><section class="admin-tab" data-admin-tab="sheets" hidden><div class="table-toolbar"><strong>Google Sheets Sync Queue</strong><button class="btn btn-secondary" type="button" data-action="download-sheet-log">ดาวน์โหลด JSON สำรอง</button></div><p>ระบบ static บน GitHub Pages ไม่ควรวาง API key ในหน้าเว็บ จึงบันทึกข้อมูลสำคัญไว้ในคิวก่อน และพร้อมส่งไป Apps Script Web App ที่ปลอดภัยเมื่อใส่ endpoint ฝั่งแอดมิน</p><label>Apps Script Web App URL<input id="sheetEndpoint" placeholder="https://script.google.com/macros/s/..." /></label><button class="btn btn-primary" type="button" data-action="save-sheet-endpoint">บันทึก Endpoint</button><div class="workflow-list" id="sheetQueue"></div></section><section class="admin-tab" data-admin-tab="versions" hidden><div class="table-toolbar"><strong>Version Log</strong><span class="badge active" id="currentVersionLabel">v4.2.0</span></div><div class="workflow-list" id="versionLog"></div></section></div></div></section>
+
+        <section class="section" id="demo" data-section-role="public">
+          <div class="section-heading">
+            <p class="eyebrow">Public Demo</p>
+            <h2>Public Demo แบบ Student Workspace เล่นได้ก่อนล็อกอิน</h2>
+            <p>ทดลอง Beginner Essentials, Vocabulary, Sentence Builder, Listening & Speaking, Writing Coach และ Quiz พร้อมคำศัพท์ 20 ชุด</p>
+          </div>
+          <div class="demo-deck-tabs" id="demoDeckTabs"></div>
+          <div class="demo-game" id="demoGame"></div>
+        </section>
+
+        <section class="section" id="student" data-section-role="student">
+          <div class="section-heading">
+            <p class="eyebrow">Student Workspace</p>
+            <h2>ระบบเรียนสำหรับลูกค้า</h2>
+            <p id="studentAccessText">หลังล็อกอิน ลูกค้าเห็นเฉพาะเมนูผู้เรียนและความปลอดภัย</p>
+          </div>
+          <div class="student-app">
+            <aside class="student-sidebar">
+              <div class="student-profile"><strong id="studentName">Student</strong><span id="studentMeta">สิทธิ์ผู้เรียน</span></div>
+              <div class="student-stat"><span>ช่วงเวลาที่ใช้งานระบบได้</span><strong id="studentWindow">-</strong></div>
+              <div class="student-stat"><span>สถานะบัญชี</span><strong id="studentStatus">active</strong></div>
+              <div class="workflow-list compact" id="studentWorkflow"></div>
+            </aside>
+            <div class="learning-workspace">
+              <div class="learning-toolbar"><div><span class="badge active">Full Lesson</span><h3 id="lessonTitle">Beginner Essentials</h3><p id="lessonDescription">เรียนคำศัพท์ ฟังเสียง เรียงประโยค ฝึกพูด เขียน และทำ Quiz</p></div></div>
+              <div class="lesson-tabs" id="lessonTabs"></div>
+              <div class="learning-grid">
+                <article class="tool-panel wide"><div class="panel-head"><strong>Lesson Player</strong><button class="icon-btn" type="button" data-action="speak-lesson" aria-label="read lesson">▶</button></div><p id="lessonBody"></p><div class="mini-timeline" id="lessonSteps"></div></article>
+                <article class="tool-panel"><div class="panel-head"><strong>Vocabulary</strong><button class="btn btn-secondary" type="button" data-action="next-word">คำต่อไป</button></div><h3 id="vocabWord">practice (ฝึกฝน)</h3><p id="vocabExample">Practice speaking every day.</p><button class="btn btn-primary" type="button" data-action="speak-word">ฟังเสียง</button></article>
+                <article class="tool-panel"><strong>Sentence Builder</strong><p>เรียงคำให้เป็นประโยค</p><div class="word-bank" id="wordBank"></div><div class="answer-box" id="sentenceAnswer"></div><div class="tool-actions"><button class="btn btn-secondary" type="button" data-action="clear-sentence">ล้าง</button><button class="btn btn-primary" type="button" data-action="check-sentence">ตรวจคำตอบ</button></div><p class="feedback" id="sentenceFeedback"></p></article>
+                <article class="tool-panel"><strong>Listening & Speaking</strong><p id="speakingPrompt">Please introduce yourself.</p><div class="tool-actions"><button class="btn btn-secondary" type="button" data-action="play-prompt">ฟังโจทย์</button><button class="btn btn-primary" type="button" data-action="record-speech">พูดตอบ</button></div><p class="feedback" id="speechFeedback">ระบบจะให้คะแนนหลังพูด</p></article>
+                <article class="tool-panel"><strong>Writing Coach</strong><textarea id="writingInput" rows="5" placeholder="Write 2-3 English sentences here..."></textarea><button class="btn btn-primary" type="button" data-action="check-writing">ตรวจงานเขียน</button><p class="feedback" id="writingFeedback"></p></article>
+                <article class="tool-panel"><strong>Quiz</strong><p id="quizQuestion"></p><div class="quiz-options" id="quizOptions"></div><p class="feedback" id="quizFeedback"></p></article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="admin" data-section-role="admin">
+          <div class="section-heading"><p class="eyebrow">Admin Management</p><h2>หลังบ้านแอดมิน: สร้างยูสเซอร์ จัดการคอนเทนต์ และดูประวัติ</h2></div>
+          <div class="admin-board"><aside class="admin-menu" id="adminMenu"></aside><div class="admin-content"><section class="admin-tab" data-admin-tab="users"><div class="table-toolbar"><strong>สร้าง User สำหรับแอดมินและลูกค้า</strong><span class="badge active">บันทึกลงฐานข้อมูลในเครื่อง + Queue ไป Google Sheets</span></div><form id="userForm" class="user-form"><label>บทบาท<select id="newRole"><option value="student">ลูกค้า / ผู้เรียน</option><option value="admin">แอดมิน</option></select></label><label>คำนำหน้า<input id="newPrefix" placeholder="นาย / นางสาว / Mr." /></label><label>ชื่อ<input id="newFirst" required /></label><label>สกุล<input id="newLast" required /></label><label>ชื่อเล่น<input id="newNick" /></label><label>Username<input id="newUsername" required /></label><label>Password<input id="newPassword" required minlength="6" /></label><label>เริ่มใช้งาน<input id="newStart" type="date" required /></label><label>สิ้นสุดใช้งาน<input id="newEnd" type="date" required /></label><button class="btn btn-primary" type="submit">สร้างยูสเซอร์</button><p class="feedback" id="userFormFeedback"></p></form><div class="responsive-table"><table><thead><tr><th>ชื่อ</th><th>Username</th><th>สิทธิ์</th><th>ช่วงเวลาใช้งาน</th><th>สถานะ</th></tr></thead><tbody id="userRows"></tbody></table></div></section><section class="admin-tab" data-admin-tab="vocab" hidden><div class="table-toolbar"><strong>ฐานข้อมูลคำศัพท์</strong><button class="btn btn-secondary" type="button" data-action="seed-vocab">โหลดชุดคำศัพท์ตัวอย่าง</button></div><div class="responsive-table"><table><thead><tr><th>คำศัพท์</th><th>ชนิดคำ</th><th>Level</th><th>ตัวอย่าง</th><th>แหล่งข้อมูล</th></tr></thead><tbody id="vocabularyRows"></tbody></table></div></section><section class="admin-tab" data-admin-tab="sheets" hidden><div class="table-toolbar"><strong>Google Sheets Sync Queue</strong><button class="btn btn-secondary" type="button" data-action="download-sheet-log">ดาวน์โหลด JSON สำรอง</button></div><p>ระบบ static บน GitHub Pages ไม่ควรวาง API key ในหน้าเว็บ จึงบันทึกข้อมูลสำคัญไว้ในคิวก่อน และพร้อมส่งไป Apps Script Web App ที่ปลอดภัยเมื่อใส่ endpoint ฝั่งแอดมิน</p><label>Apps Script Web App URL<input id="sheetEndpoint" placeholder="https://script.google.com/macros/s/..." /></label><button class="btn btn-primary" type="button" data-action="save-sheet-endpoint">บันทึก Endpoint</button><div class="workflow-list" id="sheetQueue"></div></section><section class="admin-tab" data-admin-tab="versions" hidden><div class="table-toolbar"><strong>Version Log</strong><span class="badge active" id="currentVersionLabel">v4.3.0</span></div><div class="workflow-list" id="versionLog"></div></section></div></div>
+        </section>
+
         <section class="section split" id="payment" data-section-role="admin"><div><p class="eyebrow">Payment</p><h2>ระบบชำระเงินอยู่หลังแอดมินล็อกอินเท่านั้น</h2><p>เตรียมโครง PromptPay / Omise / Stripe / Manual Transfer โดย production ต้องตรวจ webhook ฝั่ง server และบันทึกลง Google Sheets หรือฐานข้อมูลกลาง</p></div><div class="payment-flow" id="paymentFlow"></div></section>
-        <section class="section" id="security" data-section-role="student admin"><div class="section-heading"><p class="eyebrow">Security</p><h2>ความปลอดภัยตามสิทธิ์ผู้ใช้</h2><p>ลูกค้าเห็นเฉพาะเปลี่ยนชื่อ เปลี่ยนรหัสผ่าน และดูสิทธิ์ ส่วนแอดมินเห็น audit / RBAC / payment security</p></div><div class="security-grid" id="securityCards"></div></section>
+        <section class="section" id="security" data-section-role="student admin"><div class="section-heading"><p class="eyebrow">Security</p><h2>ความปลอดภัยตามสิทธิ์ผู้ใช้</h2><p id="securityIntro">ลูกค้าเห็นเฉพาะเปลี่ยนชื่อ เปลี่ยนรหัสผ่าน และดูสิทธิ์ ส่วนแอดมินเห็น audit / RBAC / payment security</p></div><div class="security-grid" id="securityCards"></div></section>
       </main>
       <footer class="footer"><span>EngLevelUp</span><span id="footerSession">ยังไม่ได้ล็อกอิน</span></footer>
     </div>
