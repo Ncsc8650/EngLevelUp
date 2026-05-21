@@ -1,203 +1,81 @@
 <!doctype html>
 <html lang="th">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="English Smart Learning Platform ระบบเรียนภาษาอังกฤษครบวงจร พร้อม Admin, Payment, Study Timer และ Security Logs" />
-    <title>English Smart Learning Platform</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="app-shell">
-      <header class="topbar">
-        <a class="brand" href="#home" aria-label="English Smart Learning Platform">
-          <span class="brand-mark">ES</span>
-          <span>
-            <strong>English Smart</strong>
-            <small>Learning Platform</small>
-          </span>
-        </a>
-        <nav class="nav-links" aria-label="Primary navigation">
-          <a href="#demo" data-nav="public" data-i18n="navDemo">ทดลองเรียน</a>
-          <a href="#student" data-nav="student" data-i18n="navStudent">ผู้เรียน</a>
-          <a href="#admin" data-nav="admin" data-i18n="navAdmin">แอดมิน</a>
-          <a href="#payment" data-nav="admin" data-i18n="navPayment">ชำระเงิน</a>
-          <a href="#security" data-nav="student admin" data-i18n="navSecurity">ความปลอดภัย</a>
-        </nav>
-        <div class="top-actions">
-          <div class="segmented-control" aria-label="Language switcher">
-            <button class="lang-toggle active" type="button" data-lang="th">TH</button>
-            <button class="lang-toggle" type="button" data-lang="en">EN</button>
-          </div>
-          <div class="segmented-control mode-control" aria-label="Demo mode switcher">
-            <button class="role-toggle active" type="button" data-role="public" data-i18n="rolePublic">หน้าแรก</button>
-            <button class="role-toggle" type="button" data-role="student" data-i18n="roleStudent">ผู้เรียน</button>
-            <button class="role-toggle" type="button" data-role="admin" data-i18n="roleAdmin">แอดมิน</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="English Smart Learning Platform ระบบเรียนภาษาอังกฤษครบวงจร พร้อมแอดมิน ชำระเงิน จับเวลาเรียน และความปลอดภัย" />
+  <title>English Smart Learning Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="learning.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="English Smart Learning Platform"><span class="brand-mark">ES</span><span><strong>English Smart</strong><small>Learning Platform</small></span></a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#demo" data-nav="public" data-i18n="navDemo">ทดลองเรียน</a>
+        <a href="#student" data-nav="student" data-i18n="navStudent">ผู้เรียน</a>
+        <a href="#admin" data-nav="admin" data-i18n="navAdmin">แอดมิน</a>
+        <a href="#payment" data-nav="admin" data-i18n="navPayment">ชำระเงิน</a>
+        <a href="#security" data-nav="student admin" data-i18n="navSecurity">ความปลอดภัย</a>
+      </nav>
+      <div class="top-actions">
+        <div class="segmented-control" aria-label="Language switcher"><button class="lang-toggle active" type="button" data-lang="th">TH</button><button class="lang-toggle" type="button" data-lang="en">EN</button></div>
+        <div class="segmented-control mode-control" aria-label="Demo mode switcher"><button class="role-toggle active" type="button" data-role="public" data-i18n="rolePublic">หน้าแรก</button><button class="role-toggle" type="button" data-role="student" data-i18n="roleStudent">ผู้เรียน</button><button class="role-toggle" type="button" data-role="admin" data-i18n="roleAdmin">แอดมิน</button></div>
+      </div>
+    </header>
+    <main>
+      <section class="hero" id="home" data-section-role="public">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="heroEyebrow">Production-ready bilingual learning system</p>
+          <h1 data-i18n="heroTitle">ระบบเรียนภาษาอังกฤษครบวงจร พร้อมชำระเงิน แอดมิน และจับเวลาเรียนจริง</h1>
+          <p class="hero-text" data-i18n="heroText">ออกแบบสำหรับผู้เริ่มต้นจนถึงระดับใช้งานจริง รองรับภาษาไทยและอังกฤษ พร้อมโมดูลเรียนครบ 4 ทักษะ ระบบสิทธิ์ ระบบแจ้งเตือน และ Security Audit Trail</p>
+          <div class="hero-actions"><button class="btn btn-primary" type="button" data-switch-role="student" data-i18n="startLearning">เริ่มเรียน</button><button class="btn btn-secondary" type="button" data-switch-role="admin" data-i18n="viewAdmin">ดูระบบแอดมิน</button></div>
+          <div class="hero-trust"><span>RBAC</span><span>Payment Webhook</span><span>Study Timer</span><span>Thai / English</span></div>
+        </div>
+        <div class="hero-panel" aria-label="Learning dashboard preview">
+          <div class="panel-head"><span data-i18n="todayMission">ภารกิจวันนี้</span><strong>Level A2</strong></div>
+          <div class="metric-grid"><div><span data-i18n="remainingHours">ชั่วโมงคงเหลือ</span><strong>18.5</strong></div><div><span data-i18n="studyStreak">เรียนต่อเนื่อง</span><strong>12</strong></div><div><span data-i18n="quizScore">คะแนนล่าสุด</span><strong>86%</strong></div></div>
+          <div class="lesson-card"><span class="status-dot"></span><div><strong data-i18n="sampleLesson">Speaking: Ordering Coffee</strong><p data-i18n="sampleLessonMeta">ฝึกพูดพร้อม Speech Recognition และ AI Coach</p></div><button class="icon-btn" type="button" aria-label="play sample">▶</button></div>
+          <div class="mini-timeline"><div><span></span><p>Login verified</p></div><div><span></span><p>Study time tracking</p></div><div><span></span><p>Level-up ready</p></div></div>
+        </div>
+      </section>
+      <section class="section" id="demo" data-section-role="public"><div class="section-heading"><p class="eyebrow" data-i18n="modulesEyebrow">Learning Modules</p><h2 data-i18n="modulesTitle">บทเรียนครบ 4 ทักษะ พร้อมคำศัพท์ ประโยค และแบบทดสอบ</h2></div><div class="module-grid" id="learningModules"></div></section>
+      <section class="section" id="student" data-section-role="student">
+        <div class="section-heading"><p class="eyebrow" data-i18n="studentEyebrow">Student Workspace</p><h2 data-i18n="studentTitle">ระบบเรียนที่ใช้งานได้จริงทันที</h2><p data-i18n="studentText">เลือกบทเรียน ฟังเสียง ฝึกพูด เรียงประโยค เขียน ทำ quiz จับเวลาเรียน และบันทึก progress ลงเครื่องอัตโนมัติ</p></div>
+        <div class="student-app">
+          <aside class="student-sidebar">
+            <div class="student-profile"><strong id="studentName">Demo Learner</strong><span id="studentLevel">Level A1</span></div>
+            <div class="student-stat"><span>ชั่วโมงคงเหลือ</span><strong id="studentHours">18.5</strong></div>
+            <div class="student-stat"><span>เวลาเรียนวันนี้</span><strong id="todayStudyTime">00:00</strong></div>
+            <div class="student-stat"><span>Progress</span><div class="progress-bar"><span id="progressFill"></span></div><strong id="progressText">0%</strong></div>
+            <div class="workflow-list compact" id="studentWorkflow"></div>
+          </aside>
+          <div class="learning-workspace">
+            <div class="learning-toolbar"><div><p class="eyebrow">Live Lesson</p><h3 id="lessonTitle">Beginner Essentials</h3><p id="lessonDescription">แนะนำตัว ถามคำถามพื้นฐาน และประโยคใช้งานจริง</p></div><div class="timer-box"><span>Study Timer</span><strong id="studyTimer">00:00</strong><div><button class="btn btn-primary" type="button" data-action="start-timer">เริ่มจับเวลา</button><button class="btn btn-secondary" type="button" data-action="stop-timer">หยุดและบันทึก</button></div></div></div>
+            <div class="lesson-tabs" id="lessonTabs"></div>
+            <div class="learning-grid">
+              <article class="tool-panel wide"><h3>Lesson Player</h3><p id="lessonBody"></p><div class="mini-timeline" id="lessonSteps"></div><button class="btn btn-secondary" type="button" data-action="speak-lesson">ฟังเสียงอ่าน</button></article>
+              <article class="tool-panel"><h3>Vocabulary</h3><strong id="vocabWord"></strong><p id="vocabMeaning"></p><p id="vocabExample"></p><div class="tool-actions"><button class="btn btn-primary" type="button" data-action="next-word">คำถัดไป</button><button class="btn btn-secondary" type="button" data-action="speak-word">ฟังคำศัพท์</button></div></article>
+              <article class="tool-panel"><h3>Sentence Builder</h3><div class="word-bank" id="wordBank"></div><div class="answer-box" id="sentenceAnswer"></div><div class="tool-actions"><button class="btn btn-primary" type="button" data-action="check-sentence">ตรวจประโยค</button><button class="btn btn-secondary" type="button" data-action="clear-sentence">ล้าง</button></div><p class="feedback" id="sentenceFeedback"></p></article>
+              <article class="tool-panel"><h3>Speaking</h3><p id="speakingPrompt"></p><div class="tool-actions"><button class="btn btn-secondary" type="button" data-action="play-prompt">ฟังประโยค</button><button class="btn btn-primary" type="button" data-action="record-speech">พูดด้วยไมค์</button></div><p class="feedback" id="speechFeedback"></p></article>
+              <article class="tool-panel"><h3>Writing Coach</h3><textarea id="writingInput" rows="4" placeholder="Write at least 8 English words..."></textarea><button class="btn btn-primary" type="button" data-action="check-writing">ตรวจงานเขียน</button><p class="feedback" id="writingFeedback"></p></article>
+              <article class="tool-panel wide"><h3>Quiz</h3><p id="quizQuestion"></p><div class="quiz-options" id="quizOptions"></div><p class="feedback" id="quizFeedback"></p></article>
+            </div>
+            <div class="payment-strip"><div><strong>แพ็กเกจเรียนออนไลน์</strong><p>เติมชั่วโมงทดสอบเพื่อให้ workflow ชำระเงินทำงานครบ</p></div><button class="btn btn-primary" type="button" data-action="buy-hours">เติม 10 ชั่วโมง ฿990</button></div>
           </div>
         </div>
-      </header>
-
-      <main>
-        <section class="hero" id="home" data-section-role="public">
-          <div class="hero-copy">
-            <p class="eyebrow" data-i18n="heroEyebrow">Production-ready bilingual learning system</p>
-            <h1 data-i18n="heroTitle">ระบบเรียนภาษาอังกฤษครบวงจร พร้อมชำระเงิน แอดมิน และจับเวลาเรียนจริง</h1>
-            <p class="hero-text" data-i18n="heroText">ออกแบบสำหรับผู้เริ่มต้นจนถึงระดับใช้งานจริง รองรับภาษาไทยและอังกฤษ พร้อมโมดูลเรียนครบ 4 ทักษะ ระบบสิทธิ์ ระบบแจ้งเตือน และ Security Audit Trail</p>
-            <div class="hero-actions">
-              <button class="btn btn-primary" type="button" data-switch-role="student" data-i18n="startLearning">เริ่มเรียน</button>
-              <button class="btn btn-secondary" type="button" data-switch-role="admin" data-i18n="viewAdmin">ดูระบบแอดมิน</button>
-            </div>
-            <div class="hero-trust">
-              <span>RBAC</span>
-              <span>Payment Webhook</span>
-              <span>Study Timer</span>
-              <span>Thai / English</span>
-            </div>
-          </div>
-          <div class="hero-panel" aria-label="Learning dashboard preview">
-            <div class="panel-head">
-              <span data-i18n="todayMission">ภารกิจวันนี้</span>
-              <strong>Level A2</strong>
-            </div>
-            <div class="metric-grid">
-              <div>
-                <span data-i18n="remainingHours">ชั่วโมงคงเหลือ</span>
-                <strong>18.5</strong>
-              </div>
-              <div>
-                <span data-i18n="studyStreak">เรียนต่อเนื่อง</span>
-                <strong>12</strong>
-              </div>
-              <div>
-                <span data-i18n="quizScore">คะแนนล่าสุด</span>
-                <strong>86%</strong>
-              </div>
-            </div>
-            <div class="lesson-card">
-              <span class="status-dot"></span>
-              <div>
-                <strong data-i18n="sampleLesson">Speaking: Ordering Coffee</strong>
-                <p data-i18n="sampleLessonMeta">ฝึกพูดพร้อม Speech Recognition และ AI Coach</p>
-              </div>
-              <button class="icon-btn" type="button" aria-label="play sample">▶</button>
-            </div>
-            <div class="mini-timeline">
-              <div><span></span><p>Login verified</p></div>
-              <div><span></span><p>Study time tracking</p></div>
-              <div><span></span><p>Level-up ready</p></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="demo" data-section-role="public">
-          <div class="section-heading">
-            <p class="eyebrow" data-i18n="modulesEyebrow">Learning Modules</p>
-            <h2 data-i18n="modulesTitle">บทเรียนครบ 4 ทักษะ พร้อมคำศัพท์ ประโยค และแบบทดสอบ</h2>
-          </div>
-          <div class="module-grid" id="learningModules"></div>
-        </section>
-
-        <section class="section split" id="student" data-section-role="student">
-          <div>
-            <p class="eyebrow" data-i18n="studentEyebrow">Student Workspace</p>
-            <h2 data-i18n="studentTitle">Dashboard ผู้เรียนที่รู้สิทธิ์ เวลาเรียน และความคืบหน้าทันที</h2>
-            <p data-i18n="studentText">ผู้เรียนเห็นระดับปัจจุบัน ชั่วโมงคงเหลือ วันหมดอายุ ประวัติการเรียน คะแนน และรายการชำระเงิน พร้อมเรียนต่อจากจุดเดิมได้ทันที</p>
-          </div>
-          <div class="workflow-list" id="studentWorkflow"></div>
-        </section>
-
-        <section class="section" id="admin" data-section-role="admin">
-          <div class="section-heading">
-            <p class="eyebrow" data-i18n="adminEyebrow">Admin Management</p>
-            <h2 data-i18n="adminTitle">หลังบ้านสำหรับจัดการผู้ใช้ คอนเทนต์ สิทธิ์ และรายงาน</h2>
-          </div>
-          <div class="admin-board">
-            <aside class="admin-menu" id="adminMenu"></aside>
-            <div class="admin-content">
-              <div class="table-toolbar">
-                <strong data-i18n="userManagement">User Management</strong>
-                <button class="btn btn-secondary" type="button" data-i18n="createUser">สร้าง User</button>
-              </div>
-              <div class="admin-kpi-grid" id="adminKpis"></div>
-              <div class="responsive-table">
-                <table>
-                  <thead>
-                    <tr>
-                      <th data-i18n="name">ชื่อ</th>
-                      <th data-i18n="role">สิทธิ์</th>
-                      <th data-i18n="expiry">หมดอายุ</th>
-                      <th data-i18n="hours">ชั่วโมง</th>
-                      <th data-i18n="status">สถานะ</th>
-                    </tr>
-                  </thead>
-                  <tbody id="userRows"></tbody>
-                </table>
-              </div>
-              <div class="admin-subsection">
-                <div class="table-toolbar">
-                  <strong data-i18n="vocabularyDatabase">Vocabulary Database</strong>
-                  <button class="btn btn-secondary" type="button" data-i18n="importVocabulary">นำเข้าคำศัพท์</button>
-                </div>
-                <div class="responsive-table">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th data-i18n="word">คำศัพท์</th>
-                        <th data-i18n="partOfSpeech">ชนิดคำ</th>
-                        <th data-i18n="level">Level</th>
-                        <th data-i18n="meaningThai">ความหมายไทย</th>
-                        <th data-i18n="source">แหล่งข้อมูล</th>
-                      </tr>
-                    </thead>
-                    <tbody id="vocabularyRows"></tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="admin-subsection">
-                <div class="table-toolbar">
-                  <strong data-i18n="importQueue">Import Queue</strong>
-                  <span class="badge warning" data-i18n="adminReviewRequired">รอแอดมินตรวจ</span>
-                </div>
-                <div class="workflow-list" id="importQueue"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section split" id="payment" data-section-role="admin">
-          <div>
-            <p class="eyebrow" data-i18n="paymentEyebrow">Payment Automation</p>
-            <h2 data-i18n="paymentTitle">Provider Adapter รองรับ PromptPay, Omise, Stripe และ Manual Transfer</h2>
-            <p data-i18n="paymentText">ทุก order ตรวจ amount, currency, signature และ idempotency ก่อนเติมชั่วโมงหรือต่ออายุ ป้องกันการเติมซ้ำและไม่เชื่อข้อมูลจาก frontend โดยตรง</p>
-          </div>
-          <div class="payment-flow" id="paymentFlow"></div>
-        </section>
-
-        <section class="section" id="security" data-section-role="student admin">
-          <div class="section-heading">
-            <p class="eyebrow" data-i18n="securityEyebrow">Security & Logs</p>
-            <h2 data-i18n="securityTitle">RBAC, Audit Trail, Login Lockout และ Suspicious Activity</h2>
-          </div>
-          <div class="security-grid" id="securityCards"></div>
-        </section>
-
-        <section class="section checklist" id="production" data-section-role="admin">
-          <div>
-            <p class="eyebrow" data-i18n="productionEyebrow">Production Checklist</p>
-            <h2 data-i18n="productionTitle">พร้อมต่อยอดเป็น Next.js/Node.js + PostgreSQL หรือ Google Sheets MVP</h2>
-          </div>
-          <ul id="productionChecklist"></ul>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <span>English Smart Learning Platform</span>
-        <span data-i18n="footerText">รองรับสองภาษา ระบบชำระเงิน แอดมิน จับเวลาเรียน และความปลอดภัย</span>
-      </footer>
-    </div>
-    <script src="app.js"></script>
-  </body>
+      </section>
+      <section class="section" id="admin" data-section-role="admin"><div class="section-heading"><p class="eyebrow" data-i18n="adminEyebrow">Admin Management</p><h2 data-i18n="adminTitle">หลังบ้านสำหรับจัดการผู้ใช้ คอนเทนต์ สิทธิ์ และรายงาน</h2></div><div class="admin-board"><aside class="admin-menu" id="adminMenu"></aside><div class="admin-content"><div class="table-toolbar"><strong data-i18n="userManagement">User Management</strong><button class="btn btn-secondary" type="button" data-i18n="createUser">สร้าง User</button></div><div class="admin-kpi-grid" id="adminKpis"></div><div class="responsive-table"><table><thead><tr><th data-i18n="name">ชื่อ</th><th data-i18n="role">สิทธิ์</th><th data-i18n="expiry">หมดอายุ</th><th data-i18n="hours">ชั่วโมง</th><th data-i18n="status">สถานะ</th></tr></thead><tbody id="userRows"></tbody></table></div><div class="admin-subsection"><div class="table-toolbar"><strong data-i18n="vocabularyDatabase">ฐานข้อมูลคำศัพท์</strong><button class="btn btn-secondary" type="button" data-i18n="importVocabulary">นำเข้าคำศัพท์</button></div><div class="responsive-table"><table><thead><tr><th data-i18n="word">คำศัพท์</th><th data-i18n="partOfSpeech">ชนิดคำ</th><th data-i18n="level">Level</th><th data-i18n="meaningThai">ความหมายไทย</th><th data-i18n="source">แหล่งข้อมูล</th></tr></thead><tbody id="vocabularyRows"></tbody></table></div></div><div class="admin-subsection"><div class="table-toolbar"><strong data-i18n="importQueue">คิวตรวจคำศัพท์</strong><span class="badge warning" data-i18n="adminReviewRequired">รอแอดมินตรวจ</span></div><div class="workflow-list" id="importQueue"></div></div></div></div></section>
+      <section class="section split" id="payment" data-section-role="admin"><div><p class="eyebrow" data-i18n="paymentEyebrow">Payment Automation</p><h2 data-i18n="paymentTitle">Provider Adapter รองรับ PromptPay, Omise, Stripe และ Manual Transfer</h2><p data-i18n="paymentText">ทุก order ตรวจ amount, currency, signature และ idempotency ก่อนเติมชั่วโมงหรือต่ออายุ</p></div><div class="payment-flow" id="paymentFlow"></div></section>
+      <section class="section" id="security" data-section-role="student admin"><div class="section-heading"><p class="eyebrow" data-i18n="securityEyebrow">Security & Logs</p><h2 data-i18n="securityTitle">RBAC, Audit Trail, Login Lockout และ Suspicious Activity</h2></div><div class="security-grid" id="securityCards"></div></section>
+      <section class="section checklist" id="production" data-section-role="admin"><div><p class="eyebrow" data-i18n="productionEyebrow">Production Checklist</p><h2 data-i18n="productionTitle">พร้อมต่อยอดเป็น Next.js/Node.js + PostgreSQL หรือ Google Sheets MVP</h2></div><ul id="productionChecklist"></ul></section>
+    </main>
+    <footer class="footer"><span>English Smart Learning Platform</span><span data-i18n="footerText">รองรับสองภาษา ระบบชำระเงิน แอดมิน จับเวลาเรียน และความปลอดภัย</span></footer>
+  </div>
+  <script src="app.js"></script>
+</body>
 </html>
