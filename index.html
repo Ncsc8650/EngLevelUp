@@ -3,13 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="EngLevelUp ระบบเรียนภาษาอังกฤษออนไลน์ พร้อม Public Demo 20 ชุดคำศัพท์ ฟัง พูด เขียน Quiz และระบบล็อกอินจริง" />
+    <meta name="description" content="EngLevelUp ระบบเรียนภาษาอังกฤษออนไลน์ พร้อม Public Demo หลายระดับ ฟัง พูด เขียน Quiz และระบบล็อกอินจริง" />
     <title>EngLevelUp English Learning</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="learning.css" />
+    <script>
+      function forceExternalBrowser() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (userAgent.indexOf("LINE") > -1) {
+          var currentUrl = window.location.href;
+          if (/android/i.test(userAgent)) {
+            var schemeUrl = currentUrl.replace(/^https?:\/\//, "");
+            window.location.href = "intent://" + schemeUrl + "#Intent;scheme=https;package=com.android.chrome;end";
+          } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            if (currentUrl.indexOf("openExternalBrowser=1") === -1) {
+              var separator = currentUrl.indexOf("?") !== -1 ? "&" : "?";
+              window.location.href = currentUrl + separator + "openExternalBrowser=1";
+            }
+          }
+        }
+      }
+      forceExternalBrowser();
+    </script>
   </head>
   <body>
     <div class="app-shell">
@@ -18,7 +36,7 @@
           <span class="brand-mark">EL</span>
           <span>
             <strong>EngLevelUp</strong>
-            <small id="versionBadge">v4.3.0</small>
+            <small id="versionBadge">v4.5.0</small>
           </span>
         </a>
         <nav class="nav-links" aria-label="Primary navigation">
@@ -43,9 +61,9 @@
           <div class="hero-copy">
             <p class="eyebrow">Demo Vocabulary Preview</p>
             <h1>ทดลองเรียนคำศัพท์ก่อนใช้งานระบบเต็ม</h1>
-            <p class="hero-text">หน้าแรกเปิดให้ลูกค้าทดลองเล่น Student Workspace แบบ Public Demo ได้ครบ พร้อมคำศัพท์ 20 ชุด ฟัง พูด เรียงประโยค Writing Coach และ Quiz ก่อนเข้าสู่ระบบเต็ม</p>
+            <p class="hero-text">หน้าแรกเปิดให้ลูกค้าทดลองเล่น Student Workspace แบบ Public Demo ได้ครบ ฟัง พูด เรียงประโยค Writing Coach และ Quiz ก่อนเข้าสู่ระบบเต็ม</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#demo">ทดลองคำศัพท์ 20 ชุด</a>
+              <a class="btn btn-primary" href="#demo">ทดลองคำศัพท์</a>
               <button class="btn btn-secondary" type="button" data-action="open-login">ล็อกอินเข้าสู่ระบบ</button>
             </div>
             <div class="hero-trust">
@@ -61,10 +79,10 @@
               <strong id="loginRoleHint">User database</strong>
             </div>
             <form id="loginForm" class="login-form">
-              <label>Username<input id="loginUsername" autocomplete="username" required placeholder="student01 หรือ admin01" /></label>
-              <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="123456" /></label>
+              <label>Username<input id="loginUsername" autocomplete="username" required placeholder="Username" /></label>
+              <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Password" /></label>
               <button class="btn btn-primary" type="submit">ล็อกอิน</button>
-              <p class="feedback" id="loginFeedback">ตัวอย่าง: student01 / 123456 หรือ admin01 / admin123</p>
+              <p class="feedback" id="loginFeedback"></p>
             </form>
           </div>
         </section>
@@ -73,7 +91,7 @@
           <div class="section-heading">
             <p class="eyebrow">Public Demo</p>
             <h2>Public Demo แบบ Student Workspace เล่นได้ก่อนล็อกอิน</h2>
-            <p>ทดลอง Beginner Essentials, Vocabulary, Sentence Builder, Listening & Speaking, Writing Coach และ Quiz พร้อมคำศัพท์ 20 ชุด</p>
+            <p>ทดลอง Beginner Essentials, Vocabulary, Sentence Builder, Listening & Speaking, Writing Coach และ Quiz</p>
           </div>
           <div class="demo-deck-tabs" id="demoDeckTabs"></div>
           <div class="demo-game" id="demoGame"></div>
@@ -87,7 +105,10 @@
           </div>
           <div class="student-app">
             <aside class="student-sidebar">
-              <div class="student-profile"><strong id="studentName">Student</strong><span id="studentMeta">สิทธิ์ผู้เรียน</span></div>
+              <div class="student-profile">
+                <strong id="studentName">Student</strong>
+                <span id="studentMeta">สิทธิ์ผู้เรียน</span>
+              </div>
               <div class="student-stat"><span>ช่วงเวลาที่ใช้งานระบบได้</span><strong id="studentWindow">-</strong></div>
               <div class="student-stat"><span>สถานะบัญชี</span><strong id="studentStatus">active</strong></div>
               <div class="workflow-list compact" id="studentWorkflow"></div>
@@ -109,7 +130,7 @@
 
         <section class="section" id="admin" data-section-role="admin">
           <div class="section-heading"><p class="eyebrow">Admin Management</p><h2>หลังบ้านแอดมิน: สร้างยูสเซอร์ จัดการคอนเทนต์ และดูประวัติ</h2></div>
-          <div class="admin-board"><aside class="admin-menu" id="adminMenu"></aside><div class="admin-content"><section class="admin-tab" data-admin-tab="users"><div class="table-toolbar"><strong>สร้าง User สำหรับแอดมินและลูกค้า</strong><span class="badge active">บันทึกลงฐานข้อมูลในเครื่อง + Queue ไป Google Sheets</span></div><form id="userForm" class="user-form"><label>บทบาท<select id="newRole"><option value="student">ลูกค้า / ผู้เรียน</option><option value="admin">แอดมิน</option></select></label><label>คำนำหน้า<input id="newPrefix" placeholder="นาย / นางสาว / Mr." /></label><label>ชื่อ<input id="newFirst" required /></label><label>สกุล<input id="newLast" required /></label><label>ชื่อเล่น<input id="newNick" /></label><label>Username<input id="newUsername" required /></label><label>Password<input id="newPassword" required minlength="6" /></label><label>เริ่มใช้งาน<input id="newStart" type="date" required /></label><label>สิ้นสุดใช้งาน<input id="newEnd" type="date" required /></label><button class="btn btn-primary" type="submit">สร้างยูสเซอร์</button><p class="feedback" id="userFormFeedback"></p></form><div class="responsive-table"><table><thead><tr><th>ชื่อ</th><th>Username</th><th>สิทธิ์</th><th>ช่วงเวลาใช้งาน</th><th>สถานะ</th></tr></thead><tbody id="userRows"></tbody></table></div></section><section class="admin-tab" data-admin-tab="vocab" hidden><div class="table-toolbar"><strong>ฐานข้อมูลคำศัพท์</strong><button class="btn btn-secondary" type="button" data-action="seed-vocab">โหลดชุดคำศัพท์ตัวอย่าง</button></div><div class="responsive-table"><table><thead><tr><th>คำศัพท์</th><th>ชนิดคำ</th><th>Level</th><th>ตัวอย่าง</th><th>แหล่งข้อมูล</th></tr></thead><tbody id="vocabularyRows"></tbody></table></div></section><section class="admin-tab" data-admin-tab="sheets" hidden><div class="table-toolbar"><strong>Google Sheets Sync Queue</strong><button class="btn btn-secondary" type="button" data-action="download-sheet-log">ดาวน์โหลด JSON สำรอง</button></div><p>ระบบ static บน GitHub Pages ไม่ควรวาง API key ในหน้าเว็บ จึงบันทึกข้อมูลสำคัญไว้ในคิวก่อน และพร้อมส่งไป Apps Script Web App ที่ปลอดภัยเมื่อใส่ endpoint ฝั่งแอดมิน</p><label>Apps Script Web App URL<input id="sheetEndpoint" placeholder="https://script.google.com/macros/s/..." /></label><button class="btn btn-primary" type="button" data-action="save-sheet-endpoint">บันทึก Endpoint</button><div class="workflow-list" id="sheetQueue"></div></section><section class="admin-tab" data-admin-tab="versions" hidden><div class="table-toolbar"><strong>Version Log</strong><span class="badge active" id="currentVersionLabel">v4.3.0</span></div><div class="workflow-list" id="versionLog"></div></section></div></div>
+          <div class="admin-board"><aside class="admin-menu" id="adminMenu"></aside><div class="admin-content"><section class="admin-tab" data-admin-tab="users"><div class="table-toolbar"><strong>สร้าง User สำหรับแอดมินและลูกค้า</strong><span class="badge active">บันทึกลงฐานข้อมูลในเครื่อง + Queue ไป Google Sheets</span></div><form id="userForm" class="user-form"><label>บทบาท<select id="newRole"><option value="student">ลูกค้า / ผู้เรียน</option><option value="admin">แอดมิน</option></select></label><label>คำนำหน้า<input id="newPrefix" placeholder="นาย / นางสาว / Mr." /></label><label>ชื่อ<input id="newFirst" required /></label><label>สกุล<input id="newLast" required /></label><label>ชื่อเล่น<input id="newNick" /></label><label>Username<input id="newUsername" required /></label><label>Password<input id="newPassword" required minlength="6" /></label><label>เริ่มใช้งาน<input id="newStart" type="date" required /></label><label>สิ้นสุดใช้งาน<input id="newEnd" type="date" required /></label><button class="btn btn-primary" type="submit">สร้างยูสเซอร์</button><p class="feedback" id="userFormFeedback"></p></form><div class="responsive-table"><table><thead><tr><th>ชื่อ</th><th>Username</th><th>สิทธิ์</th><th>ช่วงเวลาใช้งาน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody id="userRows"></tbody></table></div></section><section class="admin-tab" data-admin-tab="vocab" hidden><div class="table-toolbar"><strong>ฐานข้อมูลคำศัพท์</strong><button class="btn btn-secondary" type="button" data-action="seed-vocab">โหลดชุดคำศัพท์ตัวอย่าง</button></div><div class="responsive-table"><table><thead><tr><th>คำศัพท์</th><th>ชนิดคำ</th><th>Level</th><th>ตัวอย่าง</th><th>แหล่งข้อมูล</th></tr></thead><tbody id="vocabularyRows"></tbody></table></div></section><section class="admin-tab" data-admin-tab="sheets" hidden><div class="table-toolbar"><strong>Google Sheets Sync Queue</strong><button class="btn btn-secondary" type="button" data-action="download-sheet-log">ดาวน์โหลด JSON สำรอง</button></div><p>ระบบ static บน GitHub Pages ไม่ควรวาง API key ในหน้าเว็บ จึงบันทึกข้อมูลสำคัญไว้ในคิวก่อน และพร้อมส่งไป Apps Script Web App ที่ปลอดภัยเมื่อใส่ endpoint ฝั่งแอดมิน</p><label>Apps Script Web App URL<input id="sheetEndpoint" placeholder="https://script.google.com/macros/s/..." /></label><button class="btn btn-primary" type="button" data-action="save-sheet-endpoint">บันทึก Endpoint</button><div class="workflow-list" id="sheetQueue"></div></section><section class="admin-tab" data-admin-tab="versions" hidden><div class="table-toolbar"><strong>Version Log</strong><span class="badge active" id="currentVersionLabel">v4.5.0</span></div><div class="workflow-list" id="versionLog"></div></section></div></div>
         </section>
 
         <section class="section split" id="payment" data-section-role="admin"><div><p class="eyebrow">Payment</p><h2>ระบบชำระเงินอยู่หลังแอดมินล็อกอินเท่านั้น</h2><p>เตรียมโครง PromptPay / Omise / Stripe / Manual Transfer โดย production ต้องตรวจ webhook ฝั่ง server และบันทึกลง Google Sheets หรือฐานข้อมูลกลาง</p></div><div class="payment-flow" id="paymentFlow"></div></section>
