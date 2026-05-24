@@ -1,25 +1,16 @@
 (() => {
-  const VERSION = "v4.6.4";
+  const VERSION = "v4.6.5";
   const TOTAL_BANK = 500000;
   const WORD_COUNT = 10;
+  const STUDENT_COPY = "หลังล็อกอิน ลูกค้าเห็นคำศัพท์เบื้องต้น 10 คำ แถวเดียว รีเฟรชหน้าเว็บหรือกด Random words เพื่อเปลี่ยนชุดใหม่";
   const roots = ["message","practice","answer","question","listen","speak","learn","read","write","help","phone","school","teacher","student","family","friend","water","food","house","market","travel","ticket","hotel","work","meeting","client","email","report","payment","security","browser","lesson","score","voice","meaning","clear","daily","easy","open","copy"];
   const modifiers = ["daily","easy","clear","simple","useful","basic","smart","mobile","school","work","travel","online","friendly","quick","common","spoken","written","learning","practice","review","future","active","natural","correct","target","fresh","new","real","core","plus","next","modern"];
   const css = `
     html[data-theme="dark"] .hero,
-    html[data-theme="dark"] #home.hero {
-      background: radial-gradient(circle at 82% 18%, rgba(255,178,111,.16), transparent 30%), linear-gradient(180deg, #0f172a 0%, #0b1120 78%) !important;
-      color: #f8fafc !important;
-    }
-    html[data-theme="dark"] .hero-copy,
-    html[data-theme="dark"] .hero h1,
-    html[data-theme="dark"] .hero .hero-text,
-    html[data-theme="dark"] .hero .eyebrow,
-    html[data-theme="dark"] .hero-trust span,
-    html[data-theme="dark"] .hero-actions .btn-secondary { color: #f8fafc !important; }
-    html[data-theme="dark"] .hero-trust span,
-    html[data-theme="dark"] .hero-actions .btn-secondary { background: #111827 !important; border-color: #334155 !important; }
-    html[data-theme="dark"] .login-panel,
-    html[data-theme="dark"] .hero-panel { background: #111827 !important; color: #f8fafc !important; border-color: #334155 !important; box-shadow: 0 18px 45px rgba(0,0,0,.36) !important; }
+    html[data-theme="dark"] #home.hero { background: radial-gradient(circle at 82% 18%, rgba(255,178,111,.16), transparent 30%), linear-gradient(180deg, #0f172a 0%, #0b1120 78%) !important; color: #f8fafc !important; }
+    html[data-theme="dark"] .hero-copy,html[data-theme="dark"] .hero h1,html[data-theme="dark"] .hero .hero-text,html[data-theme="dark"] .hero .eyebrow,html[data-theme="dark"] .hero-trust span,html[data-theme="dark"] .hero-actions .btn-secondary { color: #f8fafc !important; }
+    html[data-theme="dark"] .hero-trust span,html[data-theme="dark"] .hero-actions .btn-secondary { background: #111827 !important; border-color: #334155 !important; }
+    html[data-theme="dark"] .login-panel,html[data-theme="dark"] .hero-panel { background: #111827 !important; color: #f8fafc !important; border-color: #334155 !important; box-shadow: 0 18px 45px rgba(0,0,0,.36) !important; }
     .student-top-words{display:grid!important;grid-template-columns:repeat(10,minmax(72px,1fr))!important;gap:10px;width:100%;margin-top:12px;overflow:visible!important;max-height:none!important}
     .student-top-words button{min-height:44px;border-radius:10px;white-space:normal;line-height:1.15;font-weight:800}
     .student-word-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 10px}
@@ -60,10 +51,9 @@
     let style = document.getElementById("engV461HotfixStyle");
     if (!style) { style = document.createElement("style"); style.id = "engV461HotfixStyle"; document.head.appendChild(style); }
     style.textContent = css;
-    const badge = $("versionBadge");
-    if (badge) badge.textContent = VERSION;
-    const current = $("currentVersionLabel");
-    if (current) current.textContent = VERSION;
+    const badge = $("versionBadge"); if (badge) badge.textContent = VERSION;
+    const current = $("currentVersionLabel"); if (current) current.textContent = VERSION;
+    const studentText = $("studentAccessText"); if (studentText) studentText.textContent = STUDENT_COPY;
     const label = $("themeLabel");
     const icon = document.querySelector(".theme-icon");
     const dark = document.documentElement.dataset.theme === "dark";
@@ -82,7 +72,7 @@
   }
   function apply() { applyStyleAndLabels(); ensureStudentTopWords(false); }
   setFreshWordsForPageLoad();
-  document.addEventListener("DOMContentLoaded", () => { apply(); setTimeout(() => ensureStudentTopWords(true), 500); setTimeout(() => ensureStudentTopWords(true), 1500); });
+  document.addEventListener("DOMContentLoaded", () => { apply(); setTimeout(() => ensureStudentTopWords(true), 500); setTimeout(() => ensureStudentTopWords(true), 1500); setTimeout(applyStyleAndLabels, 1700); });
   window.addEventListener("pageshow", apply);
   window.addEventListener("hashchange", () => setTimeout(() => ensureStudentTopWords(true), 250));
   document.addEventListener("click", event => {
