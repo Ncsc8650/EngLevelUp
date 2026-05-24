@@ -20,7 +20,7 @@
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <a class="brand" href="#home" aria-label="EngLevelUp"><span class="brand-mark">EL</span><span><strong>EngLevelUp</strong><small id="versionBadge">v4.6.0</small></span></a>
+      <a class="brand" href="#home" aria-label="EngLevelUp"><span class="brand-mark">EL</span><span><strong>EngLevelUp</strong><small id="versionBadge">v4.6.1</small></span></a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#demo" data-nav="public">ทดลองเรียน</a>
         <a href="#student" data-nav="student">ผู้เรียน</a>
@@ -72,7 +72,7 @@
           <section class="admin-tab" data-admin-tab="users"><div class="table-toolbar"><strong>สร้าง User สำหรับแอดมินและลูกค้า</strong><span class="badge active">บันทึกในเครื่อง + Queue ไป Google Sheets</span></div><form id="userForm" class="user-form"><label>บทบาท<select id="newRole"><option value="student">ลูกค้า / ผู้เรียน</option><option value="admin">แอดมิน</option></select></label><label>คำนำหน้า<input id="newPrefix" placeholder="นาย / นางสาว / Mr." /></label><label>ชื่อ<input id="newFirst" required /></label><label>สกุล<input id="newLast" required /></label><label>ชื่อเล่น<input id="newNick" /></label><label>Username<input id="newUsername" required /></label><label>Password<input id="newPassword" required minlength="6" /></label><label>เริ่มใช้งาน<input id="newStart" type="date" required /></label><label>สิ้นสุดใช้งาน<input id="newEnd" type="date" required /></label><button class="btn btn-primary" type="submit">สร้างยูสเซอร์</button><p class="feedback" id="userFormFeedback"></p></form><div class="responsive-table"><table><thead><tr><th>ชื่อ</th><th>Username</th><th>สิทธิ์</th><th>ช่วงเวลาใช้งาน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody id="userRows"></tbody></table></div></section>
           <section class="admin-tab" data-admin-tab="vocab" hidden><div class="table-toolbar"><strong>ฐานข้อมูลคำศัพท์</strong><button class="btn btn-secondary" type="button" data-action="seed-vocab">โหลดชุดคำศัพท์ตัวอย่าง</button></div><div class="responsive-table"><table><thead><tr><th>คำศัพท์</th><th>ชนิดคำ</th><th>ความหมาย</th><th>ตัวอย่าง</th><th>แหล่งข้อมูล</th></tr></thead><tbody id="vocabularyRows"></tbody></table></div></section>
           <section class="admin-tab" data-admin-tab="sheets" hidden><div class="table-toolbar"><strong>Google Sheets Sync Queue</strong><button class="btn btn-secondary" type="button" data-action="download-sheet-log">ดาวน์โหลด JSON สำรอง</button></div><label>Apps Script Web App URL<input id="sheetEndpoint" placeholder="https://script.google.com/macros/s/..." /></label><button class="btn btn-primary" type="button" data-action="save-sheet-endpoint">บันทึก Endpoint</button><div class="workflow-list" id="sheetQueue"></div></section>
-          <section class="admin-tab" data-admin-tab="versions" hidden><div class="table-toolbar"><strong>Version Log</strong><span class="badge active" id="currentVersionLabel">v4.6.0</span></div><div class="workflow-list" id="versionLog"></div></section>
+          <section class="admin-tab" data-admin-tab="versions" hidden><div class="table-toolbar"><strong>Version Log</strong><span class="badge active" id="currentVersionLabel">v4.6.1</span></div><div class="workflow-list" id="versionLog"></div></section>
         </div></div>
       </section>
       <section class="section split" id="payment" data-section-role="admin"><div><p class="eyebrow">Payment</p><h2>ระบบชำระเงินอยู่หลังแอดมินล็อกอินเท่านั้น</h2><p>รองรับ PromptPay / Omise / Stripe / Manual Transfer โดย production ต้องตรวจ webhook ฝั่ง server และบันทึกลง Google Sheets หรือฐานข้อมูลกลาง</p></div><div class="payment-flow" id="paymentFlow"></div></section>
@@ -81,6 +81,7 @@
     <footer class="footer"><span>EngLevelUp</span><span id="footerSession">ยังไม่ได้ล็อกอิน</span></footer>
   </div>
   <script src="app.js"></script>
-  <script src="eng-v4.5.8-patch.js?v=4.6.0"></script>
+  <script src="eng-v4.5.8-patch.js?v=4.6.1"></script>
+  <script src="eng-v4.6.1-hotfix.js?v=4.6.1"></script>
 </body>
 </html>
