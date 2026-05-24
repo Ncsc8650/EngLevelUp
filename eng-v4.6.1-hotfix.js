@@ -1,9 +1,9 @@
 (() => {
-  const VERSION = "v4.6.3";
+  const VERSION = "v4.6.4";
   const TOTAL_BANK = 500000;
-  const WORD_COUNT = 30;
+  const WORD_COUNT = 10;
   const roots = ["message","practice","answer","question","listen","speak","learn","read","write","help","phone","school","teacher","student","family","friend","water","food","house","market","travel","ticket","hotel","work","meeting","client","email","report","payment","security","browser","lesson","score","voice","meaning","clear","daily","easy","open","copy"];
-  const modifiers = ["daily","easy","clear","simple","useful","basic","smart","mobile","school","work","travel","online","friendly","quick","common","spoken","written","learning","practice","review","future","active","natural","correct","target","fresh","new","useful","real","core","plus","next","modern"];
+  const modifiers = ["daily","easy","clear","simple","useful","basic","smart","mobile","school","work","travel","online","friendly","quick","common","spoken","written","learning","practice","review","future","active","natural","correct","target","fresh","new","real","core","plus","next","modern"];
   const css = `
     html[data-theme="dark"] .hero,
     html[data-theme="dark"] #home.hero {
@@ -39,21 +39,20 @@
   }
   function setFreshWordsForPageLoad() {
     const start = String(randomStart());
-    localStorage.setItem("eng_student_30_start", start);
     localStorage.setItem("eng_student_10_start", start);
+    localStorage.removeItem("eng_student_30_start");
     sessionStorage.setItem("eng_idx_student", "0");
     sessionStorage.setItem("eng_answer_student", "[]");
   }
   function studentWords() {
-    const start = Number(localStorage.getItem("eng_student_30_start") || localStorage.getItem("eng_student_10_start") || 0);
+    const start = Number(localStorage.getItem("eng_student_10_start") || 0);
     const seen = new Set();
     const out = [];
     let i = start;
     while (out.length < WORD_COUNT) {
-      const step = out.length < 10 ? 1 : out.length < 20 ? 17 : 37;
       const word = wordAt(i % TOTAL_BANK);
       if (!seen.has(word)) { seen.add(word); out.push(word); }
-      i += step;
+      i += 1;
     }
     return out;
   }
@@ -78,7 +77,7 @@
     const words = studentWords();
     const signature = words.join("|");
     const existing = desc.querySelector(".student-top-words");
-    const html = `<div class="student-word-toolbar"><button class="btn btn-secondary" type="button" data-random-student-10>Random words</button><span class="badge active">30 words / 3 rows / ${TOTAL_BANK.toLocaleString("en-US")} bank</span></div><div class="student-top-words" data-words="${signature}">${words.map((word, i) => `<button type="button" data-word-student="${i}">${word}</button>`).join("")}</div>`;
+    const html = `<div class="student-word-toolbar"><button class="btn btn-secondary" type="button" data-random-student-10>Random words</button><span class="badge active">Beginner 10 words / ${TOTAL_BANK.toLocaleString("en-US")} bank</span></div><div class="student-top-words" data-words="${signature}">${words.map((word, i) => `<button type="button" data-word-student="${i}">${word}</button>`).join("")}</div>`;
     if (force || !existing || existing.dataset.words !== signature || existing.children.length !== WORD_COUNT) desc.innerHTML = html;
   }
   function apply() { applyStyleAndLabels(); ensureStudentTopWords(false); }
@@ -89,9 +88,8 @@
   document.addEventListener("click", event => {
     if (event.target.closest("#themeToggle")) setTimeout(applyStyleAndLabels, 0);
     if (event.target.closest("[data-random-student-10]")) {
-      const start = String(randomStart());
-      localStorage.setItem("eng_student_30_start", start);
-      localStorage.setItem("eng_student_10_start", start);
+      localStorage.setItem("eng_student_10_start", String(randomStart()));
+      localStorage.removeItem("eng_student_30_start");
       sessionStorage.setItem("eng_idx_student", "0");
       sessionStorage.setItem("eng_answer_student", "[]");
       setTimeout(() => ensureStudentTopWords(true), 0);
