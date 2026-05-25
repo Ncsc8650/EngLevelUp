@@ -3,24 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EngLevelUp ระบบเรียนภาษาอังกฤษออนไลน์ พร้อม Public Demo ฟัง พูด เรียงประโยค Writing Coach และ Quiz" />
+  <meta name="description" content="EngLevelUp ระบบเรียนภาษาอังกฤษออนไลน์ พร้อม Public Demo ฟัง พูด อ่าน เขียน และ Quiz" />
   <title>EngLevelUp English Learning</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="learning.css" />
   <style>
     :root{--page-bg:#fbfcfe;--surface:#fff;--topbar-bg:rgba(255,255,255,.94);--hero-bg:radial-gradient(circle at 82% 18%,rgba(232,111,29,.12),transparent 28%),linear-gradient(180deg,#f7fbff 0%,#fff 78%)}
-    body{background:var(--page-bg)}.topbar{background:var(--topbar-bg)}.hero{background:var(--hero-bg)}
+    body{background:var(--page-bg);font-family:Sarabun,'Noto Sans Thai',Inter,sans-serif}.topbar{background:var(--topbar-bg)}.hero{background:var(--hero-bg)}
     .theme-toggle{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:8px 12px;border:1px solid var(--gray-200);border-radius:10px;background:var(--white);color:var(--gray-700);cursor:pointer;font-weight:800}.theme-icon{display:grid;width:22px;height:22px;place-items:center;border-radius:999px;background:var(--orange-100);color:var(--orange-600);font-size:14px;line-height:1}
   </style>
   <script>(function(){var theme=localStorage.getItem('eng_theme')||'light';document.documentElement.dataset.theme=theme==='dark'?'dark':'light'})();</script>
+  <script>
+    function forceExternalBrowser(){var ua=navigator.userAgent||navigator.vendor||window.opera;if(ua.indexOf('LINE')>-1){var msg='ปัจจุบันคุณกำลังใช้งานผ่านเบราว์เซอร์ของ LINE ซึ่งอาจทำให้ระบบฟัง พูด ล็อกอิน และบันทึกข้อมูลทำงานได้ไม่เต็มร้อยเปอร์เซ็นต์ กรุณาเปิดด้วยเบราว์เซอร์หลักของโทรศัพท์ เช่น Chrome หรือ Safari';alert(msg);var currentUrl=window.location.href;if(/android/i.test(ua)){var schemeUrl=currentUrl.replace(/^https?:\/\//,'');window.location.href='intent://'+schemeUrl+'#Intent;scheme=https;package=com.android.chrome;end'}else if(/iPad|iPhone|iPod/.test(ua)&&!window.MSStream){if(currentUrl.indexOf('openExternalBrowser=1')===-1){var separator=currentUrl.indexOf('?')!==-1?'&':'?';window.location.href=currentUrl+separator+'openExternalBrowser=1'}}}}
+    forceExternalBrowser();
+  </script>
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <a class="brand" href="#home" aria-label="EngLevelUp"><span class="brand-mark">EL</span><span><strong>EngLevelUp</strong><small id="versionBadge">v4.6.5</small></span></a>
+      <a class="brand" href="#home" aria-label="EngLevelUp"><span class="brand-mark">EL</span><span><strong>EngLevelUp</strong><small id="versionBadge">v4.6.7</small></span></a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#demo" data-nav="public">ทดลองเรียน</a>
         <a href="#student" data-nav="student">ผู้เรียน</a>
@@ -39,10 +43,10 @@
       <section class="hero" id="home" data-section-role="public">
         <div class="hero-copy">
           <p class="eyebrow">Demo Vocabulary Preview</p>
-          <h1>ทดลองเรียนคำศัพท์ก่อนใช้งานระบบเต็ม</h1>
-          <p class="hero-text">หน้าแรกเปิดให้ลูกค้าทดลองเล่น Student Workspace แบบ Public Demo ได้ครบ ฟัง พูด เรียงประโยค Writing Coach และ Quiz ก่อนเข้าสู่ระบบเต็ม</p>
-          <div class="hero-actions"><a class="btn btn-primary" href="#demo">ทดลองคำศัพท์</a><button class="btn btn-secondary" type="button" data-action="open-login">ล็อกอิน</button></div>
-          <div class="hero-trust"><span>Thai ready</span><span>Mobile first</span><span>Role login</span><span>Google Sheets log queue</span></div>
+          <h1>EngLevelUp เรียนภาษาอังกฤษให้ใช้ได้จริง</h1>
+          <p class="hero-text">หน้าแรกเปิดให้ทดลอง Student Workspace แบบ Public Demo พร้อมคำศัพท์ ฟัง พูด เรียงประโยค Writing Coach และ Quiz ก่อนเข้าสู่ระบบเต็ม</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="#demo">ทดลองเรียน</a><button class="btn btn-secondary" type="button" data-action="open-login">ล็อกอิน</button></div>
+          <div class="hero-trust"><span>Thai ready</span><span>Mobile first</span><span>Role login</span><span>Admin control</span></div>
         </div>
         <div class="hero-panel login-panel" id="loginPanel">
           <div class="panel-head"><span>เข้าสู่ระบบ</span><strong id="loginRoleHint">User database</strong></div>
@@ -55,33 +59,33 @@
         </div>
       </section>
       <section class="section" id="demo" data-section-role="public">
-        <div class="section-heading"><p class="eyebrow">Public Demo</p><h2>Public Demo แบบ Student Workspace เล่นได้ก่อนล็อกอิน</h2><p>เดโม่คำศัพท์ 10 คำ พร้อมฟัง พูด เรียงประโยค Writing Coach และ Quiz</p></div>
+        <div class="section-heading"><p class="eyebrow">Public Demo</p><h2>ทดลองเรียนก่อนล็อกอิน</h2><p>เดโม่คำศัพท์ 10 คำ พร้อมฟัง พูด เรียงประโยค Writing Coach และ Quiz</p></div>
         <div class="demo-deck-tabs" id="demoDeckTabs"></div>
         <div class="demo-game" id="demoGame"></div>
       </section>
       <section class="section" id="student" data-section-role="student">
-        <div class="section-heading"><p class="eyebrow">Student Workspace</p><h2>ระบบเรียนสำหรับลูกค้า</h2><p id="studentAccessText">หลังล็อกอิน ลูกค้าเห็นคำศัพท์เบื้องต้น 10 คำ แถวเดียว รีเฟรชหน้าเว็บหรือกด Random words เพื่อเปลี่ยนชุดใหม่</p></div>
-        <div class="student-app">
-          <aside class="student-sidebar"><div class="student-profile"><strong id="studentName">Student</strong><span id="studentMeta">สิทธิ์ผู้เรียน</span></div><div class="student-stat"><span>ช่วงเวลาที่ใช้งานระบบได้</span><strong id="studentWindow">-</strong></div><div class="student-stat"><span>สถานะบัญชี</span><strong id="studentStatus">active</strong></div><div class="workflow-list compact" id="studentWorkflow"></div></aside>
-          <div class="learning-workspace"><div class="learning-toolbar"><div><span class="badge active">Full Lesson</span><h3 id="lessonTitle">Beginner Essentials</h3><p id="lessonDescription">เรียนคำศัพท์เบื้องต้น 10 คำ ฟังเสียง เรียงประโยค ฝึกพูด เขียน และทำ Quiz</p></div></div><div class="lesson-tabs" id="lessonTabs"></div><div class="learning-grid"></div></div>
-        </div>
+        <div class="section-heading"><p class="eyebrow">Student Workspace</p><h2>ระบบเรียนสำหรับลูกค้า</h2><p id="studentAccessText">หลังล็อกอิน ลูกค้าเห็นคำศัพท์เบื้องต้น 10 คำ แถวละ 5 คำ 2 แถว รีเฟรชหน้าเว็บหรือกด Random words เพื่อเปลี่ยนชุดใหม่</p></div>
+        <div class="student-app"><aside class="student-sidebar"><div class="student-profile"><strong id="studentName">Student</strong><span id="studentMeta">สิทธิ์ผู้เรียน</span></div><div class="student-stat"><span>ช่วงเวลาที่ใช้งานระบบได้</span><strong id="studentWindow">-</strong></div><div class="student-stat"><span>สถานะบัญชี</span><strong id="studentStatus">active</strong></div><div class="workflow-list compact" id="studentWorkflow"></div></aside><div class="learning-workspace"><div class="learning-toolbar"><div><span class="badge active">Full Lesson</span><h3 id="lessonTitle">Beginner Essentials</h3><p id="lessonDescription">เรียนคำศัพท์เบื้องต้น 10 คำ แถวละ 5 คำ 2 แถว ฟังเสียง เรียงประโยค ฝึกพูด เขียน และทำ Quiz</p></div></div><div class="lesson-tabs" id="lessonTabs"></div><div class="learning-grid"></div></div></div>
       </section>
       <section class="section" id="admin" data-section-role="admin">
-        <div class="section-heading"><p class="eyebrow">Admin Management</p><h2>หลังบ้านแอดมิน: สร้างยูสเซอร์ จัดการคอนเทนต์ และดูประวัติ</h2></div>
+        <div class="section-heading"><p class="eyebrow">Admin Management</p><h2>หลังบ้านแอดมิน</h2><p>สร้างยูสเซอร์ แก้ไข ลบ ดู Log จัดการ Footer และตรวจข้อมูลระบบ</p></div>
         <div class="admin-board"><aside class="admin-menu" id="adminMenu"></aside><div class="admin-content">
-          <section class="admin-tab" data-admin-tab="users"><div class="table-toolbar"><strong>สร้าง User สำหรับแอดมินและลูกค้า</strong><span class="badge active">บันทึกในเครื่อง + Queue ไป Google Sheets</span></div><form id="userForm" class="user-form"><label>บทบาท<select id="newRole"><option value="student">ลูกค้า / ผู้เรียน</option><option value="admin">แอดมิน</option></select></label><label>คำนำหน้า<input id="newPrefix" placeholder="นาย / นางสาว / Mr." /></label><label>ชื่อ<input id="newFirst" required /></label><label>สกุล<input id="newLast" required /></label><label>ชื่อเล่น<input id="newNick" /></label><label>Username<input id="newUsername" required /></label><label>Password<input id="newPassword" required minlength="6" /></label><label>เริ่มใช้งาน<input id="newStart" type="date" required /></label><label>สิ้นสุดใช้งาน<input id="newEnd" type="date" required /></label><button class="btn btn-primary" type="submit">สร้างยูสเซอร์</button><p class="feedback" id="userFormFeedback"></p></form><div class="responsive-table"><table><thead><tr><th>ชื่อ</th><th>Username</th><th>สิทธิ์</th><th>ช่วงเวลาใช้งาน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody id="userRows"></tbody></table></div></section>
+          <section class="admin-tab" data-admin-tab="users"><div class="table-toolbar"><strong>สร้าง User สำหรับแอดมินและลูกค้า</strong><span class="badge active">แจ้งเตือนสำเร็จ/ไม่สำเร็จ</span></div><form id="userForm" class="user-form"><label>บทบาท<select id="newRole"><option value="student">ลูกค้า / ผู้เรียน</option><option value="admin">แอดมิน</option></select></label><label>คำนำหน้า<input id="newPrefix" placeholder="นาย / นางสาว / Mr." /></label><label>ชื่อ<input id="newFirst" required /></label><label>สกุล<input id="newLast" required /></label><label>ชื่อเล่น<input id="newNick" /></label><label>Username<input id="newUsername" required /></label><label>Password<input id="newPassword" required minlength="6" /></label><label>เริ่มใช้งาน<input id="newStart" type="date" required /></label><label>สิ้นสุดใช้งาน<input id="newEnd" type="date" required /></label><button class="btn btn-primary" type="submit">สร้างยูสเซอร์</button><p class="feedback" id="userFormFeedback"></p></form><div class="responsive-table"><table><thead><tr><th>ชื่อ</th><th>Username</th><th>สิทธิ์</th><th>ช่วงเวลาใช้งาน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody id="userRows"></tbody></table></div></section>
           <section class="admin-tab" data-admin-tab="vocab" hidden><div class="table-toolbar"><strong>ฐานข้อมูลคำศัพท์</strong><button class="btn btn-secondary" type="button" data-action="seed-vocab">โหลดชุดคำศัพท์ตัวอย่าง</button></div><div class="responsive-table"><table><thead><tr><th>คำศัพท์</th><th>ชนิดคำ</th><th>ความหมาย</th><th>ตัวอย่าง</th><th>แหล่งข้อมูล</th></tr></thead><tbody id="vocabularyRows"></tbody></table></div></section>
           <section class="admin-tab" data-admin-tab="sheets" hidden><div class="table-toolbar"><strong>Google Sheets Sync Queue</strong><button class="btn btn-secondary" type="button" data-action="download-sheet-log">ดาวน์โหลด JSON สำรอง</button></div><label>Apps Script Web App URL<input id="sheetEndpoint" placeholder="https://script.google.com/macros/s/..." /></label><button class="btn btn-primary" type="button" data-action="save-sheet-endpoint">บันทึก Endpoint</button><div class="workflow-list" id="sheetQueue"></div></section>
-          <section class="admin-tab" data-admin-tab="versions" hidden><div class="table-toolbar"><strong>Version Log</strong><span class="badge active" id="currentVersionLabel">v4.6.5</span></div><div class="workflow-list" id="versionLog"></div></section>
+          <section class="admin-tab" data-admin-tab="logs" hidden><div class="table-toolbar"><strong>Login / Admin Activity Logs</strong><div class="tool-actions"><span class="badge active">50 items per page</span><button class="btn btn-secondary" type="button" data-action="export-logs-excel">Export Excel</button></div></div><div class="workflow-list" id="adminLogRows"></div><div class="tool-actions"><button class="btn btn-secondary" type="button" data-action="log-prev">Previous</button><span class="badge" id="adminLogPage"></span><button class="btn btn-secondary" type="button" data-action="log-next">Next</button></div></section>
+          <section class="admin-tab" data-admin-tab="footer" hidden><div class="table-toolbar"><strong>แก้ไขข้อความ Footer</strong></div><label>ข้อความ Footer<textarea id="footerTextInput" rows="4"></textarea></label><button class="btn btn-primary" type="button" data-action="save-footer">บันทึก Footer</button><p class="feedback" id="footerFeedback"></p></section>
+          <section class="admin-tab" data-admin-tab="versions" hidden><div class="table-toolbar"><strong>Version Log</strong><span class="badge active" id="currentVersionLabel">v4.6.7</span></div><div class="workflow-list" id="versionLog"></div></section>
         </div></div>
       </section>
-      <section class="section split" id="payment" data-section-role="admin"><div><p class="eyebrow">Payment</p><h2>ระบบชำระเงินอยู่หลังแอดมินล็อกอินเท่านั้น</h2><p>รองรับ PromptPay / Omise / Stripe / Manual Transfer โดย production ต้องตรวจ webhook ฝั่ง server และบันทึกลง Google Sheets หรือฐานข้อมูลกลาง</p></div><div class="payment-flow" id="paymentFlow"></div></section>
+      <section class="section split" id="payment" data-section-role="admin"><div><p class="eyebrow">Payment</p><h2>ระบบชำระเงินสำหรับแอดมิน</h2><p>รองรับ PromptPay / Omise / Stripe / Manual Transfer โดย production ต้องตรวจ webhook ฝั่ง server</p></div><div class="payment-flow" id="paymentFlow"></div></section>
       <section class="section" id="security" data-section-role="student admin"><div class="section-heading"><p class="eyebrow">Security</p><h2>ความปลอดภัยตามสิทธิ์ผู้ใช้</h2><p id="securityIntro">ลูกค้าเห็นเฉพาะสิทธิ์ของตัวเอง ส่วนแอดมินเห็น audit / RBAC / payment security</p></div><div class="security-grid" id="securityCards"></div></section>
     </main>
     <footer class="footer"><span>EngLevelUp</span><span id="footerSession">ยังไม่ได้ล็อกอิน</span></footer>
   </div>
-  <script src="app.js"></script>
-  <script src="eng-v4.5.8-patch.js?v=4.6.5"></script>
-  <script src="eng-v4.6.1-hotfix.js?v=4.6.5"></script>
+  <div id="appNotify" class="app-notify"></div>
+  <script src="app.js?v=4.6.7"></script>
+  <script src="eng-v4.5.8-patch.js?v=4.6.7"></script>
+  <script src="eng-v4.6.1-hotfix.js?v=4.6.7"></script>
 </body>
 </html>
