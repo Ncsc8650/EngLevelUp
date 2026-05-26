@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = "v4.7.1";
+  const VERSION = "v4.7.2";
   const WORD_COUNT = 10;
   const studentWordBank = [
     "message","practice","answer","question","listen","speak","learn","read","write","help",
@@ -18,7 +18,15 @@
     try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); } catch { return fallback; }
   };
   const setJson = (key, value) => localStorage.setItem(key, JSON.stringify(value));
-  const role = () => getJson("eng_current_user", null)?.role || "public";
+  const session = () => getJson("eng_current_user", null);
+  const users = () => getJson("eng_users", []);
+  const currentUser = () => {
+    const s = session();
+    if (!s) return null;
+    if (s.role) return s;
+    return users().find(u => u.id === s.id || u.username === s.username) || s;
+  };
+  const role = () => currentUser()?.role || "public";
   const today = () => new Date().toISOString().slice(0, 10);
   const val = id => ($(id)?.value || "").trim();
   const randomStart = () => Math.floor(Math.random() * studentWordBank.length);
@@ -79,6 +87,12 @@
       i += 1;
     }
     return out;
+  }
+
+  function randomizeStudentWords() {
+    localStorage.setItem("eng_student_10_start", String(randomStart()));
+    renderStudentWords(true);
+    toast("สุ่มคำศัพท์ใหม่ 10 คำเรียบร้อย", "ok");
   }
 
   function speakText(text) {
@@ -182,10 +196,10 @@
   }
 
   function style() {
-    let s = $("engV471Style");
+    let s = $("engV472Style");
     if (!s) {
       s = document.createElement("style");
-      s.id = "engV471Style";
+      s.id = "engV472Style";
       document.head.appendChild(s);
     }
     s.textContent = `
@@ -196,8 +210,7 @@
       html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea{background:#0f172a!important;color:#fff!important;border-color:#475569!important}
       html[data-theme="dark"] .btn-secondary,html[data-theme="dark"] .theme-toggle,html[data-theme="dark"] .demo-deck-tabs button,html[data-theme="dark"] .lesson-tabs button,html[data-theme="dark"] .word-bank button,html[data-theme="dark"] .quiz-options button,html[data-theme="dark"] .answer-box span,html[data-theme="dark"] .vocab-grid button{background:#0f172a!important;color:#f8fafc!important;border-color:#475569!important}
       html[data-theme="dark"] .btn-primary{color:#fff!important}html[data-theme="dark"] .eng-toast{background:#111827;color:#f8fafc;border-color:#334155}
-      #student #lessonDescription .student-word-toolbar,#student #lessonDescription .student-top-words{display:none!important}#student #lessonTabs .vocab-grid:not(.student-clean-words){display:none!important}
-      #student .student-clean-tools{display:flex!important;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 12px!important}.student-clean-note{font-size:13px;font-weight:800;color:#64748b}
+      #student #lessonDescription{display:block!important}.student-clean-tools{display:flex!important;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 12px!important}.student-clean-note{font-size:13px;font-weight:800;color:#64748b}html[data-theme="dark"] .student-clean-note{color:#cbd5e1!important}
       #student .student-clean-words{display:grid!important;grid-template-columns:repeat(10,minmax(58px,1fr))!important;gap:8px!important;width:100%!important;overflow:visible!important;max-height:none!important;margin:0!important}
       #student .student-clean-words button{min-height:42px!important;border-radius:10px!important;white-space:normal!important;line-height:1.12!important;font-weight:800!important;padding:7px 5px!important}
       @media(max-width:820px){#student .student-clean-words{grid-template-columns:repeat(5,minmax(0,1fr))!important}}
@@ -211,8 +224,6 @@
     const current = $("currentVersionLabel"); if (current) current.textContent = VERSION;
     const text = $("studentAccessText");
     if (text) text.textContent = "หลังล็อกอิน ลูกค้าใช้โหมดเรียนเหมือน Demo แต่พิเศษกว่า: สุ่มคำศัพท์ใหม่ได้เรื่อยๆ และโชว์เฉพาะคำศัพท์ 10 คำ";
-    const desc = $("lessonDescription");
-    if (role() === "student" && desc) desc.textContent = "เรียนคำศัพท์ ฟังเสียง เรียงประโยค ฝึกพูด เขียน และทำ Quiz";
     const lab = $("themeLabel");
     const icon = document.querySelector(".theme-icon");
     const dark = document.documentElement.dataset.theme === "dark";
@@ -229,21 +240,27 @@
     document.body.appendChild(modal);
   }
 
+  function wordsHtml(words) {
+    return `<div class="student-clean-tools"><button class="btn btn-primary" type="button" data-random-student-clean>Random words</button><span class="student-clean-note">แสดงเฉพาะคำศัพท์ 10 คำ กดคำเพื่อฟังเสียง</span></div><div class="vocab-grid student-clean-words" data-words="${words.join("|")}">${words.map(word => `<button type="button" data-student-clean-word>${word}</button>`).join("")}</div>`;
+  }
+
   function renderStudentWords(force = false) {
     if (role() !== "student") return;
-    const tabs = $("lessonTabs");
-    if (!tabs) return;
     const words = freshWords();
     const signature = words.join("|");
-    const current = tabs.querySelector(".student-clean-words");
-    if (!force && current && current.dataset.words === signature && current.children.length === WORD_COUNT) return;
-    tabs.innerHTML = `<div class="student-clean-tools"><button class="btn btn-primary" type="button" data-random-student-clean>Random words</button><span class="student-clean-note">แสดงเฉพาะคำศัพท์ 10 คำ</span></div><div class="vocab-grid student-clean-words" data-words="${signature}">${words.map(word => `<button type="button" data-student-clean-word>${word}</button>`).join("")}</div>`;
+    const desc = $("lessonDescription");
+    if (desc) {
+      const current = desc.querySelector(".student-clean-words");
+      if (force || !current || current.dataset.words !== signature) desc.innerHTML = wordsHtml(words);
+    }
+    const tabs = $("lessonTabs");
+    if (tabs) tabs.innerHTML = `<button class="active" type="button">Full Lesson</button>`;
   }
 
   function wireLoginOnly() {
     const login = $("loginForm");
-    if (!login || login.dataset.v471 === "1") return;
-    login.dataset.v471 = "1";
+    if (!login || login.dataset.v472 === "1") return;
+    login.dataset.v472 = "1";
     login.addEventListener("submit", async event => {
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -255,13 +272,12 @@
         toast(msg, "error");
       };
       if (!username || !password) return fail("ล็อกอินไม่สำเร็จ: กรุณากรอก Username และ Password");
-      const users = getJson("eng_users", []);
-      const user = users.find(item => String(item.username || "").toLowerCase() === username);
+      const user = users().find(item => String(item.username || "").toLowerCase() === username);
       if (!user) return fail("ล็อกอินไม่สำเร็จ: ไม่พบ Username นี้");
       if (user.passwordHash !== await sha256(password)) return fail("ล็อกอินไม่สำเร็จ: Password ไม่ถูกต้อง");
       const err = accessError(user);
       if (err) return fail(`ล็อกอินไม่สำเร็จ: ${err}`);
-      localStorage.setItem("eng_current_user", JSON.stringify({ ...user, passwordHash: undefined, loginAt: new Date().toISOString() }));
+      localStorage.setItem("eng_current_user", JSON.stringify({ id: user.id, role: user.role, username: user.username, loginAt: new Date().toISOString() }));
       addLog("login_success", { username, role: user.role });
       toast(`ล็อกอินสำเร็จ: ${fullName(user)}`, "ok");
       setTimeout(() => { location.hash = user.role === "admin" ? "#admin" : "#student"; location.reload(); }, 500);
@@ -270,8 +286,8 @@
 
   function wireAdminCreateNoticeOnly() {
     const form = $("userForm");
-    if (!form || form.dataset.v471Notice === "1") return;
-    form.dataset.v471Notice = "1";
+    if (!form || form.dataset.v472Notice === "1") return;
+    form.dataset.v472Notice = "1";
     form.addEventListener("submit", () => {
       const buttonText = form.querySelector("button")?.textContent || "";
       const editing = buttonText.includes("แก้ไข") || buttonText.includes("บันทึก");
@@ -308,9 +324,7 @@
     if (random) {
       event.preventDefault();
       event.stopImmediatePropagation();
-      localStorage.setItem("eng_student_10_start", String(randomStart()));
-      renderStudentWords(true);
-      toast("สุ่มคำศัพท์ใหม่ 10 คำเรียบร้อย", "ok");
+      randomizeStudentWords();
       return;
     }
     const wordButton = event.target.closest("[data-student-clean-word]");
@@ -334,8 +348,10 @@
       speakText(panelText(button, action));
       return;
     }
-    if (role() === "student" && ["next-student", "random-student", "pick-student-word"].includes(action)) {
-      setTimeout(() => renderStudentWords(true), 120);
+    if (role() === "student" && ["next-student", "next-word", "random-student", "pick-student-word"].includes(action)) {
+      if (action === "random-student") localStorage.setItem("eng_student_10_start", String(randomStart()));
+      setTimeout(() => renderStudentWords(true), 180);
+      setTimeout(() => renderStudentWords(true), 650);
     }
     if (event.target.closest("#themeToggle")) setTimeout(labels, 80);
   }, true);
